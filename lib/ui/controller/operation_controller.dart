@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:f_web_authentication/ui/controller/dificultad.dart';
 import 'package:f_web_authentication/ui/controller/hacer_operacion.dart';
@@ -39,10 +40,20 @@ class OperationController extends GetxController {
   }
 
   void sendanswer() {
-    if(value.value==answer.answer){
-      //respuesta correcta
+    if(value.value==answer.value){
+      Get.snackbar(
+        "Enhorabuena!!",
+        "Respuesta correcta",
+        backgroundColor: Colors.green,
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }else{
-      //respuesta incorrecta
+      Get.snackbar(
+        "Sigue intentando",
+        "Respuesta incorrecta",
+        backgroundColor: Colors.red,
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 }
