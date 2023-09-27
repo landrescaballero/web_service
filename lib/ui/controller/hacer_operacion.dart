@@ -18,7 +18,9 @@ class OperationGeneratorController extends GetxController {
     num1.value = generateNumber(difficulty);
     num2.value = generateNumber(difficulty);
     operator.value = generateOperation();
-    
+    operationController.setOp1(num1.value.toString());
+    operationController.setOp2(operator.value);
+    operationController.setOp3(num2.value.toString());
   }
 
   int generateNumber(int difficulty) {
