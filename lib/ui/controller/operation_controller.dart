@@ -1,7 +1,7 @@
-import 'package:get/get.dart';
 import 'package:f_web_authentication/ui/controller/dificultad.dart';
 import 'package:f_web_authentication/ui/controller/hacer_operacion.dart';
 import 'package:f_web_authentication/ui/controller/verificar.dart';
+import 'package:get/get.dart';
 
 
 class OperationController extends GetxController {
@@ -39,7 +39,7 @@ class OperationController extends GetxController {
   }
 
   void sendanswer() {
-    if(value.value==answer.answer){
+    if(value.value==answer.value){
       //respuesta correcta
     }else{
       //respuesta incorrecta

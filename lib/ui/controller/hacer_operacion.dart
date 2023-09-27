@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:f_web_authentication/ui/controller/dificultad.dart';
+import 'package:f_web_authentication/ui/controller/operation_controller.dart';
 import 'package:get/get.dart';
 
 class OperationGeneratorController extends GetxController {
   final DifficultyController difficultyController = Get.find();
+  final OperationController operationController = Get.find();
   final num1 = 0.obs;
   final num2 = 0.obs;
   final operator = "".obs;
