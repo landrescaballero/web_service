@@ -1,6 +1,6 @@
-import 'package:get/get.dart';
 import 'package:f_web_authentication/ui/controller/dificultad.dart';
 import 'package:f_web_authentication/ui/controller/hacer_operacion.dart';
+import 'package:get/get.dart';
 
 class ResultVerificationController extends GetxController {
   final DifficultyController difficultyController = Get.find();
@@ -9,22 +9,12 @@ class ResultVerificationController extends GetxController {
 
   bool verifyResult(int userAnswer) {
     // Generar una nueva operación utilizando OperationGeneratorController
-    final operation = operationGeneratorController.generateRandomOperation();
+    final num1=operationGeneratorController.num1.value;
+    final num2=operationGeneratorController.num2.value;
+    final operator=operationGeneratorController.operator.value;
 
-    // Dividir la operación en sus componentes (números y operador)
-    final parts = operation.split(' ');
-
-    if (parts.length != 3) {
-      // Si la operación no tiene el formato correcto (por ejemplo, "5 + 3"), se considera incorrecta.
-      difficultyController.incrementIncorrectAnswers();
-      return false;
-    }
-
-    final num1 = int.tryParse(parts[0]);
-    final operator = parts[1];
-    final num2 = int.tryParse(parts[2]);
-
-    if (num1 == null || num2 == null) {
+    // ignore: unnecessary_null_comparison
+    if (num1 == null || num2 == null || operator == null) {
       return false;
     }
 

@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:f_web_authentication/ui/controller/dificultad.dart';
-import 'package:f_web_authentication/ui/controller/hacer_operacion.dart';
-import 'package:f_web_authentication/ui/controller/verificar.dart';
 
 
 class OperationController extends GetxController {
-  final DifficultyController difficultyController = Get.put(DifficultyController());
-  final OperationGeneratorController operationGeneratorController = Get.put(OperationGeneratorController());
-  final ResultVerificationController resultVerificationController = Get.put(ResultVerificationController());
+  //DifficultyController difficultyController = Get.find();
   RxString value = "0".obs;
   RxString op1 = "1".obs;
   RxString op2 = "+".obs;
