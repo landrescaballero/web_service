@@ -2,15 +2,18 @@ import 'dart:math';
 
 import 'package:f_web_authentication/ui/controller/dificultad.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
+import 'package:f_web_authentication/ui/controller/verificar.dart';
 import 'package:get/get.dart';
 
 class OperationGeneratorController extends GetxController {
-  final DifficultyController difficultyController = Get.find();
-  final OperationController operationController = Get.find();
-  final num1 = 0.obs;
-  final num2 = 0.obs;
-  final operator = "".obs;
-  
+  DifficultyController difficultyController = Get.put(DifficultyController());
+  OperationController operationController = Get.find();
+  ResultVerificationController resultVerificationController =
+      Get.put(ResultVerificationController());
+  RxInt num1 = 0.obs;
+  RxInt num2 = 0.obs;
+  RxString operator = "".obs;
+  RxInt res = 0.obs;
 
   void generateRandomOperation() {
     difficultyController.calculateDifficulty();
@@ -18,9 +21,13 @@ class OperationGeneratorController extends GetxController {
     num1.value = generateNumber(difficulty);
     num2.value = generateNumber(difficulty);
     operator.value = generateOperation();
+
+    res.value = resultVerificationController.verifyResult();
+
     operationController.setOp1(num1.value.toString());
     operationController.setOp2(operator.value);
     operationController.setOp3(num2.value.toString());
+   // operationController.setAnswer(res.value.toString());
   }
 
   int generateNumber(int difficulty) {

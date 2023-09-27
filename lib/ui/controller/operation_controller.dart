@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
@@ -9,6 +10,9 @@ class OperationController extends GetxController {
   RxString op3 = "1".obs;
   RxString answer = "2".obs;
 
+  String getOP(){
+    return op1.value+op2.value+op3.value;
+  }
   void increment(String str) {
     if (value == "0".obs) {
       value.value = str;
@@ -32,12 +36,25 @@ class OperationController extends GetxController {
   void setOp3(String str) {
     op3.value = str;
   }
-
+ // void setAnswer(String str) {
+ //   answer.value = str;
+  //}
   void sendanswer() {
+    
     if(value.value==answer.value){
-      //respuesta correcta
+      Get.snackbar(
+        "Enhorabuena!!",
+        "Respuesta correcta",
+        backgroundColor: Colors.green,
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }else{
-      //respuesta incorrecta
+      Get.snackbar(
+        "Sigue intentando",
+        "Respuesta incorrecta",
+        backgroundColor: Colors.red,
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 }
