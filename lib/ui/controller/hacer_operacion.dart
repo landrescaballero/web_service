@@ -5,16 +5,18 @@ import 'package:get/get.dart';
 
 class OperationGeneratorController extends GetxController {
   final DifficultyController difficultyController = Get.find();
+  final num1 = 0.obs;
+  final num2 = 0.obs;
+  final operator = "".obs;
+  
 
-  String generateRandomOperation() {
-    final int difficulty = difficultyController.calculateDifficulty();
-    final num1 = generateNumber(difficulty);
-    final num2 = generateNumber(difficulty);
-    final operator = generateOperation();
-
-    final operation = '$num1 $operator $num2';
-
-    return operation;
+  void generateRandomOperation() {
+    difficultyController.calculateDifficulty();
+    int difficulty=difficultyController.difficulty.value;
+    num1.value = generateNumber(difficulty);
+    num2.value = generateNumber(difficulty);
+    operator.value = generateOperation();
+    
   }
 
   int generateNumber(int difficulty) {
@@ -23,18 +25,20 @@ class OperationGeneratorController extends GetxController {
   }
 
   String generateOperation() {
+    int difficulty=difficultyController.difficulty.value;
+
     final operators = ['+', '-', '*','/'];
     var operator="";
-    if (difficultyController.calculateDifficulty() <= 5) {
+    if (difficulty <= 5) {
       operator= operators[0];
     }
-    if (difficultyController.calculateDifficulty() < 10 && difficultyController.calculateDifficulty()>5) {
+    if (difficulty < 10 && difficulty>5) {
       operator= operators[1];
     }
-    if (difficultyController.calculateDifficulty() < 15 && difficultyController.calculateDifficulty()>10) {
+    if (difficulty < 15 && difficulty>10) {
       operator= operators[2];
     }
-    if (difficultyController.calculateDifficulty() < 20 && difficultyController.calculateDifficulty()>15) {
+    if (difficulty < 20 && difficulty>15) {
       operator= operators[3];
     }
     return operator;
