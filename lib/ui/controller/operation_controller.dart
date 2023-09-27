@@ -38,5 +38,11 @@ class OperationController extends GetxController {
     op3.value = str;
   }
 
-  void sendanswer() {}
+  void sendanswer() {
+    if(value.value==answer.answer){
+      //respuesta correcta
+    }else{
+      //respuesta incorrecta
+    }
+  }
 }
