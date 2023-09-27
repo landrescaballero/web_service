@@ -39,21 +39,40 @@ class _Operations extends State<Operations> {
       ]),
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        operators(),
-        answer(),
+        Container(
+            width: 250,
+            height: 100,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: const Color.fromARGB(255, 54, 44, 43),
+                width: 2,
+              ),
+              color: const Color.fromARGB(255, 73, 109, 67),
+            ),
+            child: Column(children: [
+              operators(),
+              const SizedBox(
+                height: 20,
+              ),
+              answer(),
+            ])),
+        const SizedBox(height: 20),
         buttons(),
       ])),
     );
   }
 
   Widget answer() {
-    return Obx(() => Text(operationController.value.toString()));
+    return Obx(() => Text(operationController.value.toString(),
+        style: const TextStyle(fontSize: 30)));
   }
 
   Widget operators() {
-    return Obx(() => Text(operationController.op1.toString() +
-        operationController.op2.toString() +
-        operationController.op3.toString()));
+    return Obx(() => Text(
+        operationController.op1.toString() +
+            operationController.op2.toString() +
+            operationController.op3.toString(),
+        style: const TextStyle(fontSize: 30)));
   }
 
   Widget buttons() {
