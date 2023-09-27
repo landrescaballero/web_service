@@ -42,7 +42,7 @@ class OperationController extends GetxController {
     if(value.value==answer.answer){
       //respuesta correcta
     }else{
-      /respuesta incorrecta
+      //respuesta incorrecta
     }
   }
 }
