@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:f_web_authentication/ui/controller/dificultad.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class OperationGeneratorController extends GetxController {
   final DifficultyController difficultyController = Get.find();
@@ -24,8 +23,20 @@ class OperationGeneratorController extends GetxController {
   }
 
   String generateOperation() {
-    final operators = ['+', '-', '*'];
-    final random = Random();
-    return operators[random.nextInt(operators.length)];
+    final operators = ['+', '-', '*','/'];
+    var operator="";
+    if (difficultyController.calculateDifficulty() <= 5) {
+      operator= operators[0];
+    }
+    if (difficultyController.calculateDifficulty() < 10 && difficultyController.calculateDifficulty()>5) {
+      operator= operators[1];
+    }
+    if (difficultyController.calculateDifficulty() < 15 && difficultyController.calculateDifficulty()>10) {
+      operator= operators[2];
+    }
+    if (difficultyController.calculateDifficulty() < 20 && difficultyController.calculateDifficulty()>15) {
+      operator= operators[3];
+    }
+    return operator;
   }
 }
