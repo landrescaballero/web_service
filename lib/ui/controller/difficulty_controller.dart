@@ -7,6 +7,7 @@ class DifficultyController extends GetxController {
 
   void incrementCorrectAnswers() {
     correctAnswers++;
+    calculateDifficulty();
   }
 
   void incrementIncorrectAnswers() {

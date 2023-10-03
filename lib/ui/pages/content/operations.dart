@@ -1,10 +1,11 @@
+import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
+import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../controller/authentication_controller.dart';
-import '../../controller/hacer_operacion.dart';
 import '../../controller/user_controller.dart';
 
 class Operations extends StatefulWidget {
@@ -18,8 +19,8 @@ class _Operations extends State<Operations> {
   UserController userController = Get.find();
   AuthenticationController authenticationController = Get.find();
   OperationController operationController = Get.find();
-  OperationGeneratorController operationGeneratorController = Get.put(OperationGeneratorController());
-
+  OperationGeneratorController operationGeneratorController = Get.find();
+  DifficultyController difController = Get.find();
 
   _logout() async {
     try {
@@ -60,6 +61,11 @@ class _Operations extends State<Operations> {
             ])),
         const SizedBox(height: 20),
         buttons(),
+        const SizedBox(height: 20),
+        Obx(
+          () => Text("Dificultad: ${difController.difficulty.value}",
+              style: const TextStyle(fontSize: 30)),
+        ),
       ])),
     );
   }
@@ -70,7 +76,6 @@ class _Operations extends State<Operations> {
   }
 
   Widget operators() {
-    operationGeneratorController.generateRandomOperation();
     return Obx(() => Text(operationController.getOP(),
         style: const TextStyle(fontSize: 30)));
   }
@@ -144,6 +149,7 @@ class _Operations extends State<Operations> {
             backgroundColor: const Color.fromARGB(255, 95, 245, 68),
             onPressed: () {
               operationController.sendanswer();
+              operationGeneratorController.generateRandomOperation();
             },
             child: const Text("OK")),
       ])

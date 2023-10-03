@@ -1,3 +1,4 @@
+import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
@@ -16,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final controllerEmail = TextEditingController(text: 'a@a.com');
   final controllerPassword = TextEditingController(text: '123456');
   AuthenticationController authenticationController = Get.find();
+  OperationGeneratorController opGenController = Get.find();
 
   _login(theEmail, thePassword) async {
     logInfo('_login $theEmail $thePassword');
@@ -95,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                           if (_formKey.currentState!.validate()) {
                             await _login(
                                 controllerEmail.text, controllerPassword.text);
+                            opGenController.generateRandomOperation();
                           }
                         },
                         child: const Text("Submit")),
