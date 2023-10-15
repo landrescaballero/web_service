@@ -4,7 +4,6 @@ import 'package:f_web_authentication/ui/controller/authentication_controller.dar
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
 import 'package:f_web_authentication/ui/controller/user_controller.dart';
-import 'package:f_web_authentication/ui/controller/verification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
@@ -27,7 +26,6 @@ void main() {
   Get.put(UserController());
   Get.put(DifficultyController());
   Get.put(OperationController());
-  Get.put(ResultVerificationController());
   Get.put(OperationGeneratorController());
   runApp(const MyApp());
 }

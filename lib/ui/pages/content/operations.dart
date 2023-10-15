@@ -1,6 +1,6 @@
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
-import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
+import 'package:f_web_authentication/ui/pages/content/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
@@ -19,7 +19,6 @@ class _Operations extends State<Operations> {
   UserController userController = Get.find();
   AuthenticationController authenticationController = Get.find();
   OperationController operationController = Get.find();
-  OperationGeneratorController operationGeneratorController = Get.find();
   DifficultyController difController = Get.find();
 
   _logout() async {
@@ -33,7 +32,7 @@ class _Operations extends State<Operations> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Welcome"), actions: [
+      appBar: AppBar(title: const Text("Vamos tu puedes!!"), actions: [
         IconButton(
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {
@@ -71,12 +70,13 @@ class _Operations extends State<Operations> {
   }
 
   Widget answer() {
-    return Obx(() => Text(operationController.value.toString(),
+    return Obx(() => Text(operationController.value.value.toString(),
         style: const TextStyle(fontSize: 30)));
   }
 
   Widget operators() {
-    return Obx(() => Text(operationController.getOP(),
+    return Obx(() => Text(
+        operationController.getOP(operationController.n.value),
         style: const TextStyle(fontSize: 30)));
   }
 
@@ -149,7 +149,18 @@ class _Operations extends State<Operations> {
             backgroundColor: const Color.fromARGB(255, 95, 245, 68),
             onPressed: () {
               operationController.sendanswer();
-              operationGeneratorController.generateRandomOperation();
+              if (operationController.n.value == 5) {
+                int numC = 0;
+                for (var j = 0; j < 5; j++) {
+                  if (operationController.getAnswer(j)) {
+                    numC++;
+                  }
+                }
+                difController.incrementCorrectAnswers(numC);
+                difController.incrementIncorrectAnswers(5 - numC);
+                Get.to(const ResultPage());
+                _logout();
+              }
             },
             child: const Text("OK")),
       ])

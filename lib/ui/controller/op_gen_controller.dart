@@ -2,55 +2,128 @@ import 'dart:math';
 
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
-import 'package:f_web_authentication/ui/controller/verification_controller.dart';
 import 'package:get/get.dart';
 
 class OperationGeneratorController extends GetxController {
   OperationController operationController = Get.find();
   DifficultyController difficultyController = Get.find();
-  ResultVerificationController resultVerificationController = Get.find();
 
-  RxInt num1 = 0.obs;
-  RxInt num2 = 0.obs;
-  RxString operator = "".obs;
+  List<int> num1 = List<int>.filled(5, 0);
+  List<int> num2 = List<int>.filled(5, 0);
+  List<String> operator = ["", "", "", "", "", ""];
 
   void generateRandomOperation() {
     difficultyController.calculateDifficulty();
-    int difficulty = difficultyController.difficulty.value;
-    num1.value = generateNumber(difficulty);
-    num2.value = generateNumber(difficulty);
-    operator.value = generateOperation();
+    for (var i = 0; i < 5; i++) {
+      operator[i] = generateOperation();
+      num1[i] = generateNumber1(i);
+      num2[i] = generateNumber2(i);
+      int res = verifyResult(i);
 
-    operationController.setOp1(num1.value.toString());
-    operationController.setOp2(operator.value);
-    operationController.setOp3(num2.value.toString());
-
-    int res = resultVerificationController.verifyResult();
-    operationController.setAnswer(res.toString());
+      operationController.setOp1(num1[i].toString(), i);
+      operationController.setOp2(operator[i], i);
+      operationController.setOp3(num2[i].toString(), i);
+      operationController.setAnswer(res.toString(), i);
+    }
   }
 
-  int generateNumber(int difficulty) {
+  int generateNumber1(int i) {
+    int difficulty = difficultyController.difficulty.value;
     final random = Random();
-    return random.nextInt(difficulty * 10) + 1;
+    if (operator[i] != '*') {
+      if (difficulty % 2 == 0) {
+        return random.nextInt(100) + 1;
+      } else {
+        return random.nextInt(10) + 1;
+      }
+    } else {
+      return random.nextInt(10) + 1;
+    }
+  }
+
+  int generateNumber2(int i) {
+    int difficulty = difficultyController.difficulty.value;
+    final random = Random();
+    if (operator[i] != '*') {
+      if (difficulty % 2 == 0) {
+        if (operator[i] == '-') {
+          int n = 1000;
+          while (n > num1[i]) {
+            n = random.nextInt(100) + 1;
+          }
+          return n;
+        }
+        return random.nextInt(100) + 1;
+      } else {
+        if (operator[i] == '-') {
+          int n = 1000;
+          while (n > num1[i]) {
+            n = random.nextInt(10) + 1;
+          }
+          return n;
+        }
+        return random.nextInt(10) + 1;
+      }
+    } else {
+      return random.nextInt(10) + 1;
+    }
   }
 
   String generateOperation() {
     int difficulty = difficultyController.difficulty.value;
 
-    final operators = ['+', '-', '*', '/'];
-    var operator = "";
-    if (difficulty <= 5) {
-      operator = operators[0];
+    List<String> operators = [];
+    switch (difficulty) {
+      case 1:
+        operators = ['+'];
+        break;
+      case 2:
+        operators = ['+'];
+        break;
+      case 3:
+        operators = ['+', '-'];
+        break;
+      case 4:
+        operators = ['+', '-'];
+        break;
+      case 5:
+        operators = ['+', '-', '*'];
+        break;
+      case 6:
+        operators = ['+', '-', '*'];
+        break;
+      case 7:
+        operators = ['+', '-', '*', '/'];
+        break;
+      case 8:
+        operators = ['+', '-', '*', '/'];
+        break;
     }
-    if (difficulty < 10 && difficulty > 5) {
-      operator = operators[1];
+
+    final random = Random();
+    return operators[random.nextInt(operators.length)];
+  }
+
+  int verifyResult(int i) {
+    // Generar una nueva operación utilizando OperationGeneratorController
+    int correctAnswer = 0;
+
+    // Realizar la operación matemática y calcular la respuesta correcta
+    switch (operator[i]) {
+      case '+':
+        correctAnswer = num1[i] + num2[i];
+        break;
+      case '-':
+        correctAnswer = (num1[i] - num2[i]);
+        break;
+      case '*':
+        correctAnswer = (num1[i] * num2[i]);
+        break;
+      case '/':
+        correctAnswer = (num1[i] ~/ num2[i]);
+        break;
     }
-    if (difficulty < 15 && difficulty > 10) {
-      operator = operators[2];
-    }
-    if (difficulty < 20 && difficulty > 15) {
-      operator = operators[3];
-    }
-    return operator;
+
+    return correctAnswer;
   }
 }
