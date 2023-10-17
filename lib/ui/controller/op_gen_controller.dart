@@ -8,13 +8,13 @@ class OperationGeneratorController extends GetxController {
   OperationController operationController = Get.find();
   DifficultyController difficultyController = Get.find();
 
-  List<int> num1 = List<int>.filled(5, 0);
-  List<int> num2 = List<int>.filled(5, 0);
-  List<String> operator = ["", "", "", "", "", ""];
+  List<int> num1 = List<int>.filled(6, 0);
+  List<int> num2 = List<int>.filled(6, 0);
+  List<String> operator = List<String>.filled(6, "");
 
   void generateRandomOperation() {
     difficultyController.calculateDifficulty();
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 6; i++) {
       operator[i] = generateOperation();
       num1[i] = generateNumber1(i);
       num2[i] = generateNumber2(i);

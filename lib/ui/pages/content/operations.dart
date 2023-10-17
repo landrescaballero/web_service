@@ -149,15 +149,15 @@ class _Operations extends State<Operations> {
             backgroundColor: const Color.fromARGB(255, 95, 245, 68),
             onPressed: () {
               operationController.sendanswer();
-              if (operationController.n.value == 5) {
+              if (operationController.n.value == 6) {
                 int numC = 0;
-                for (var j = 0; j < 5; j++) {
+                for (var j = 0; j < 6; j++) {
                   if (operationController.getAnswer(j)) {
                     numC++;
                   }
                 }
                 difController.incrementCorrectAnswers(numC);
-                difController.incrementIncorrectAnswers(5 - numC);
+                difController.incrementIncorrectAnswers(6 - numC);
                 Get.to(const ResultPage());
                 _logout();
               }

@@ -42,7 +42,7 @@ class _ResultState extends State<ResultPage> {
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         const Text("Sus resultados fueron: ", style: TextStyle(fontSize: 40)),
-        SizedBox(height: 40),
+        const SizedBox(height: 40),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Text(
             "Operacion 1: ",
@@ -50,7 +50,7 @@ class _ResultState extends State<ResultPage> {
           ),
           respuesta(operationController.getAnswer(0))
         ]),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Text(
             "Operacion 2: ",
@@ -58,7 +58,7 @@ class _ResultState extends State<ResultPage> {
           ),
           respuesta(operationController.getAnswer(1))
         ]),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Text(
             "Operacion 3: ",
@@ -66,7 +66,7 @@ class _ResultState extends State<ResultPage> {
           ),
           respuesta(operationController.getAnswer(2))
         ]),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Text(
             "Operacion 4: ",
@@ -74,13 +74,21 @@ class _ResultState extends State<ResultPage> {
           ),
           respuesta(operationController.getAnswer(3))
         ]),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Text(
             "Operacion 5: ",
             style: TextStyle(fontSize: 20),
           ),
           respuesta(operationController.getAnswer(4))
+        ]),
+        const SizedBox(height: 10),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          const Text(
+            "Operacion 6: ",
+            style: TextStyle(fontSize: 20),
+          ),
+          respuesta(operationController.getAnswer(5))
         ]),
       ])),
       floatingActionButton: FilledButton(

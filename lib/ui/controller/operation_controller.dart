@@ -6,11 +6,19 @@ class OperationController extends GetxController {
   DifficultyController difController = Get.find();
   RxString value = "0".obs;
   RxInt n = 0.obs;
-  List<RxString> op1 = ["0".obs, "0".obs, "0".obs, "0".obs, "0".obs];
-  List<RxString> op2 = ["".obs, "".obs, "".obs, "".obs, "".obs];
-  List<RxString> op3 = ["0".obs, "0".obs, "0".obs, "0".obs, "0".obs];
-  List<RxString> answer = ["0".obs, "0".obs, "0".obs, "0".obs, "0".obs];
+  List<RxString> op1 = ["0".obs, "0".obs, "0".obs, "0".obs, "0".obs, "0".obs];
+  List<RxString> op2 = ["".obs, "".obs, "".obs, "".obs, "".obs, "".obs];
+  List<RxString> op3 = ["0".obs, "0".obs, "0".obs, "0".obs, "0".obs, "0".obs];
+  List<RxString> answer = [
+    "0".obs,
+    "0".obs,
+    "0".obs,
+    "0".obs,
+    "0".obs,
+    "0".obs
+  ];
   List<RxBool> correct = [
+    false.obs,
     false.obs,
     false.obs,
     false.obs,
@@ -19,10 +27,10 @@ class OperationController extends GetxController {
   ];
 
   String getOP(int n) {
-    if (n < 5) {
+    if (n < 6) {
       return op1[n].value + op2[n].value + op3[n].value;
     } else {
-      return op1[4].value + op2[4].value + op3[4].value;
+      return op1[5].value + op2[5].value + op3[5].value;
     }
   }
 
@@ -55,7 +63,7 @@ class OperationController extends GetxController {
   }
 
   void sendanswer() {
-    if (n.value <= 4) {
+    if (n.value <= 5) {
       if (value.value == answer[n.value].value) {
         Get.snackbar("Enhorabuena!!", "Respuesta correcta",
             backgroundColor: const Color.fromARGB(255, 95, 245, 68),

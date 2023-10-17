@@ -14,8 +14,8 @@ class DifficultyController extends GetxController {
   }
 
   void calculateDifficulty() {
-    if (correctAnswers.value >= incorrectAnswers.value + 5 &&
-        correctAnswers.value >= 5) {
+    if (correctAnswers.value >= incorrectAnswers.value + 6 &&
+        correctAnswers.value >= 6) {
       difficulty++;
       correctAnswers.value = 0;
       incorrectAnswers.value = 0;
@@ -23,8 +23,8 @@ class DifficultyController extends GetxController {
   }
 
   bool nivelUp() {
-    if (correctAnswers.value >= incorrectAnswers.value + 5 &&
-        correctAnswers.value >= 5) {
+    if (correctAnswers.value >= incorrectAnswers.value + 6 &&
+        correctAnswers.value >= 6) {
       calculateDifficulty();
       return true;
     } else {
