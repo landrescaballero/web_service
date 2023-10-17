@@ -40,16 +40,22 @@ class _WelcomeState extends State<WelcomePage> {
       ]),
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const Text("Welcome user", style: TextStyle(fontSize: 30)),
-        const SizedBox(height: 20),
+        const Text("Bienvenido", style: TextStyle(fontSize: 40)),
+        const SizedBox(height: 40),
         Text("Nivel Actual: ${diffController.difficulty.value}",
             style: const TextStyle(fontSize: 20)),
-        Text(
-            "Número de respuestas correctas: ${diffController.correctAnswers.value}",
-            style: const TextStyle(fontSize: 20)),
-        Text(
-            "Número de respuestas incorrectas: ${diffController.incorrectAnswers.value}",
-            style: const TextStyle(fontSize: 20)),
+        SizedBox(height: 20),
+        Text("Respuestas correctas: ${diffController.correctAnswers.value}",
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.green,
+            )),
+        SizedBox(height: 20),
+        Text("Respuestas incorrectas: ${diffController.incorrectAnswers.value}",
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.red,
+            )),
       ])),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -60,6 +66,7 @@ class _WelcomeState extends State<WelcomePage> {
           Get.to(() => Operations());
         },
         child: const Text("Iniciar"),
+        
       ),
     );
   }

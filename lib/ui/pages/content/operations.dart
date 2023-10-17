@@ -42,7 +42,7 @@ class _Operations extends State<Operations> {
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Container(
-            width: 250,
+            width: 200,
             height: 100,
             decoration: BoxDecoration(
               border: Border.all(

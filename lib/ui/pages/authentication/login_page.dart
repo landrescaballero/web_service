@@ -48,17 +48,22 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Login with email",
-                      style: TextStyle(fontSize: 20),
+                      "Inicio de sesión",
+                      style: TextStyle(fontSize: 40),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       controller: controllerEmail,
-                      decoration:
-                          const InputDecoration(labelText: "Email address"),
+                      decoration: const InputDecoration(
+                        labelText: "Email address",
+                        labelStyle: TextStyle(
+                          color: Colors.red,
+                          fontSize: 25,
+                        ),
+                      ),
                       validator: (String? value) {
                         if (value!.isEmpty) {
                           return "Enter email";
@@ -69,11 +74,17 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 30,
                     ),
                     TextFormField(
                       controller: controllerPassword,
-                      decoration: const InputDecoration(labelText: "Password"),
+                      decoration: const InputDecoration(
+                        labelText: "Password",
+                        labelStyle: TextStyle(
+                          color: Colors.red,
+                          fontSize: 25,
+                        ),
+                      ),
                       keyboardType: TextInputType.number,
                       obscureText: true,
                       validator: (String? value) {
@@ -86,21 +97,33 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
                     OutlinedButton(
-                        onPressed: () async {
-                          // this line dismiss the keyboard by taking away the focus of the TextFormField and giving it to an unused
-                          FocusScope.of(context).requestFocus(FocusNode());
-                          final form = _formKey.currentState;
-                          form!.save();
-                          if (_formKey.currentState!.validate()) {
-                            await _login(
-                                controllerEmail.text, controllerPassword.text);
-                            opGenController.generateRandomOperation();
-                          }
-                        },
-                        child: const Text("Submit")),
+                      onPressed: () async {
+                        // this line dismiss the keyboard by taking away the focus of the TextFormField and giving it to an unused
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        final form = _formKey.currentState;
+                        form!.save();
+                        if (_formKey.currentState!.validate()) {
+                          await _login(
+                              controllerEmail.text, controllerPassword.text);
+                          opGenController.generateRandomOperation();
+                        }
+                      },
+                      child: const Text("Submit"),
+                      style: OutlinedButton.styleFrom(
+                        minimumSize: Size(100, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              10), // establece la forma del botón
+                        ),
+                        textStyle: TextStyle(
+                          color: Colors.black, // establece el color del texto del botón
+                          fontSize:20, // establece el tamaño de fuente del texto del botón
+                        ),
+                      ),
+                    ),
                   ]),
             ),
             TextButton(
@@ -108,7 +131,17 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const SignUp()));
                 },
-                child: const Text("Create account"))
+                child: const Text("Create account"),
+                      style: OutlinedButton.styleFrom(
+                        minimumSize: Size(100, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              10), // establece la forma del botón
+                        ),
+                        textStyle: TextStyle(
+                          color: Colors.black, // establece el color del texto del botón
+                          fontSize:20,),
+                      ))
           ],
         ),
       ),
