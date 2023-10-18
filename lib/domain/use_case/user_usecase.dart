@@ -9,9 +9,9 @@ class UserUseCase {
 
   UserUseCase();
 
-  Future<List<User>> getUsers() async {
+  Future<bool> getUser(String email, String password) async {
     logInfo("Getting users  from UseCase");
-    return await _repository.getUsers();
+    return await _repository.getUser(email, password);
   }
 
   Future<void> addUser(User user) async => await _repository.addUser(user);

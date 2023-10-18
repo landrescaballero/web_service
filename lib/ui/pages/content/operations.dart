@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
 
 import '../../../utils.dart';
-import '../../controller/authentication_controller.dart';
 import '../../controller/user_controller.dart';
 
 class Operations extends StatefulWidget {
@@ -19,14 +18,13 @@ class Operations extends StatefulWidget {
 
 class _Operations extends State<Operations> {
   UserController userController = Get.find();
-  AuthenticationController authenticationController = Get.find();
   OperationController operationController = Get.find();
   DifficultyController difController = Get.find();
   TimerController timerController = Get.find();
 
   _logout() async {
     try {
-      await authenticationController.logOut();
+      await userController.logOut();
     } catch (e) {
       logInfo(e);
     }

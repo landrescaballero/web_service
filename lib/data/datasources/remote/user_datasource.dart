@@ -6,26 +6,26 @@ import 'package:http/http.dart' as http;
 class UserDataSource {
   final String apiKey = 'i9c13B';
 
-  Future<List<User>> getUsers() async {
-    List<User> users = [];
-    var request = Uri.parse("https://retoolapi.dev/$apiKey/data")
-        .resolveUri(Uri(queryParameters: {
-      "format": 'json',
-    }));
+  Future<bool> getUser(String email, String password) async {
+    logInfo("Web service, verifying user");
+    var request = Uri.parse(
+        "https://retoolapi.dev/$apiKey/data?email=$email&password=$password");
 
     var response = await http.get(request);
 
     if (response.statusCode == 200) {
       //logInfo(response.body);
       final data = jsonDecode(response.body);
-
-      users = List<User>.from(data.map((x) => User.fromJson(x)));
+      logInfo(data);
+      if (data.length > 0) {
+        return Future.value(true);
+      } else {
+        return Future.value(false);
+      }
     } else {
       logError("Got error code ${response.statusCode}");
-      return Future.error('Error code ${response.statusCode}');
+      return Future.value(false);
     }
-
-    return Future.value(users);
   }
 
   Future<bool> addUser(User user) async {
