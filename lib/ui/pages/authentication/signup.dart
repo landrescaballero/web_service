@@ -134,6 +134,13 @@ class _FirebaseSignUpState extends State<SignUp> {
                             if (value!.isEmpty) {
                               return "Enter course";
                             }
+
+                            final course = int.tryParse(value);
+
+                            if (course == null || course < 1 || course > 11) {
+                              return "Enter a valid course (1-11)";
+                            }
+
                             return null;
                           },
                         ),
@@ -166,6 +173,7 @@ class _FirebaseSignUpState extends State<SignUp> {
                 ))));
   }
 }
+
 bool isValidDateFormat(String input) {
   final datePattern = r'^\d{2}/\d{2}/\d{4}$';
   if (RegExp(datePattern).hasMatch(input)) {
@@ -173,7 +181,7 @@ bool isValidDateFormat(String input) {
     final day = int.tryParse(parts[0]);
     final month = int.tryParse(parts[1]);
     final year = int.tryParse(parts[2]);
-    
+
     if (day != null && month != null && year != null) {
       if (day >= 1 && day <= 31 && month >= 1 && month <= 12) {
         // Consider checking for valid years, e.g., if you want to restrict the range.
@@ -183,4 +191,3 @@ bool isValidDateFormat(String input) {
   }
   return false;
 }
-
