@@ -1,4 +1,6 @@
+import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
+import 'package:f_web_authentication/ui/controller/player_controller.dart';
 import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +20,8 @@ class _LoginPageState extends State<LoginPage> {
   final controllerPassword = TextEditingController(text: '123456');
   OperationGeneratorController opGenController = Get.find();
   UserController userController = Get.find();
+  DifficultyController diffController = Get.find();
+  PlayerController playerController = Get.find();
 
   _login(theEmail, thePassword) async {
     logInfo('_login $theEmail $thePassword');
@@ -30,6 +34,8 @@ class _LoginPageState extends State<LoginPage> {
           icon: const Icon(Icons.person, color: Colors.blue),
           snackPosition: SnackPosition.BOTTOM,
         );
+      } else {
+        diffController.setDifficulty(playerController.difficult.value);
       }
     } catch (err) {
       Get.snackbar(

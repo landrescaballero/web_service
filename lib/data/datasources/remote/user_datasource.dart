@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'package:f_web_authentication/ui/controller/player_controller.dart';
+import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
 import '../../../domain/models/user.dart';
 import 'package:http/http.dart' as http;
 
 class UserDataSource {
-  final String apiKey = '1pynEv';
+  final String apiKey = 'wiZQez';
+  PlayerController playerController = Get.find();
 
   Future<bool> getUser(String email, String password) async {
     logInfo("Web service, verifying user");
@@ -16,8 +19,10 @@ class UserDataSource {
     if (response.statusCode == 200) {
       //logInfo(response.body);
       final data = jsonDecode(response.body);
-      logInfo(data);
+
+      playerController.setValues(data[0]);
       if (data.length > 0) {
+        logInfo("User verified");
         return Future.value(true);
       } else {
         return Future.value(false);
@@ -39,7 +44,7 @@ class UserDataSource {
       body: jsonEncode(user.toJson()),
     );
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 201 || response.statusCode == 200) {
       //logInfo(response.body);
       return Future.value(true);
     } else {
@@ -48,7 +53,18 @@ class UserDataSource {
     }
   }
 
-  Future<bool> updateUser(User user) async {
+  Future<bool> updateUser() async {
+    logInfo("Web service, Updating user");
+    User user = User(
+        firstName: playerController.firstName.value,
+        lastName: playerController.lastName.value,
+        email: playerController.email.value,
+        password: playerController.password.value,
+        id: playerController.id.value,
+        birthday: playerController.birthday.value,
+        course: playerController.course.value,
+        difficult: playerController.difficult.value.toString(),
+        school: playerController.school.value);
     final response = await http.put(
       Uri.parse("https://retoolapi.dev/$apiKey/data/${user.id}"),
       headers: <String, String>{
@@ -56,8 +72,8 @@ class UserDataSource {
       },
       body: jsonEncode(user.toJson()),
     );
-
-    if (response.statusCode == 201) {
+    logInfo(response.statusCode);
+    if (response.statusCode == 201 || response.statusCode == 200) {
       //logInfo(response.body);
       return Future.value(true);
     } else {

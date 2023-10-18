@@ -3,6 +3,7 @@ import 'package:f_web_authentication/ui/central.dart';
 import 'package:f_web_authentication/ui/controller/authentication_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
+import 'package:f_web_authentication/ui/controller/player_controller.dart';
 import 'package:f_web_authentication/ui/controller/time_controller.dart';
 import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ void main() {
     ),
   );
 
+  Get.put(PlayerController());
   Get.put(Repository());
   Get.put(AuthenticationUseCase());
   Get.put(UserUseCase());

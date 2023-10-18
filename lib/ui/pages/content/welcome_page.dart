@@ -1,6 +1,7 @@
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
+import 'package:f_web_authentication/ui/controller/player_controller.dart';
 import 'package:f_web_authentication/ui/controller/time_controller.dart';
 import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:f_web_authentication/ui/pages/content/operations.dart';
@@ -21,6 +22,7 @@ class _WelcomeState extends State<WelcomePage> {
   OperationController operationController = Get.find();
   OperationGeneratorController opGenController = Get.find();
   TimerController timerController = Get.find();
+  PlayerController playerController = Get.find();
 
   _logout() async {
     try {
@@ -42,7 +44,8 @@ class _WelcomeState extends State<WelcomePage> {
       ]),
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const Text("Bienvenido", style: TextStyle(fontSize: 40)),
+        Obx(() => Text("Bienvenido, ${playerController.firstName.value}.",
+            style: const TextStyle(fontSize: 40))),
         const SizedBox(height: 40),
         Text("Nivel Actual: ${diffController.difficulty.value}",
             style: const TextStyle(fontSize: 20)),

@@ -1,3 +1,5 @@
+import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
+import 'package:f_web_authentication/ui/controller/player_controller.dart';
 import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:f_web_authentication/ui/pages/content/welcome_page.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,10 @@ class CongratulationPage extends StatefulWidget {
 
 class _CongratulationState extends State<CongratulationPage> {
   UserController userController = Get.find();
+  DifficultyController diffController = Get.find();
+  PlayerController playerController = Get.find();
 
+  //ir a la pagina de central
   _logout() async {
     try {
       await userController.logOut();
@@ -46,6 +51,10 @@ class _CongratulationState extends State<CongratulationPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           logInfo("new operations");
+
+          logInfo("${diffController.difficulty.value}");
+          playerController.updateDifficult(diffController.difficulty.value);
+          userController.updateUser();
           Get.to(() => const WelcomePage());
         },
         child: const Text("OK"),

@@ -16,8 +16,7 @@ class UserUseCase {
 
   Future<void> addUser(User user) async => await _repository.addUser(user);
 
-  Future<void> updateUser(User user) async =>
-      await _repository.updateUser(user);
+  Future<void> updateUser() async => await _repository.updateUser();
 
   deleteUser(int id) async => await _repository.deleteUser(id);
 

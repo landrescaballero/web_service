@@ -46,5 +46,6 @@ class User {
         "password": password,
         "firstname": firstName,
         "diff": difficult,
+        "school": school,
       };
 }

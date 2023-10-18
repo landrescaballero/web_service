@@ -15,6 +15,10 @@ class DifficultyController extends GetxController {
     incorrectAnswers.value += num;
   }
 
+  void setDifficulty(int d) {
+    difficulty.value = d;
+  }
+
   void calculateDifficulty() {
     if (correctAnswers.value >= incorrectAnswers.value + 6 &&
         correctAnswers.value >= 6 &&
