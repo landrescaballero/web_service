@@ -1,4 +1,5 @@
 class User {
+  
   User({
     this.id,
     required this.firstName,

@@ -9,7 +9,6 @@ class UserController extends GetxController {
   RxBool logged = false.obs;
 
   bool get isLogged => logged.value;
-
   Future<void> logOut() async {
     logged.value = false;
   }
