@@ -14,9 +14,13 @@ class _FirebaseSignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final controllerEmail = TextEditingController(text: 'a@a.com');
   final controllerPassword = TextEditingController(text: '123456');
+  final controllerFirstName = TextEditingController();
+  final controllerLastName = TextEditingController();
+  final controllerBirthDate = TextEditingController();
+  final controllerCourse = TextEditingController();
   AuthenticationController authenticationController = Get.find();
 
-  _signup(theEmail, thePassword) async {
+  _signup(theEmail, thePassword, firstName, lastName, birthDate, course) async {
     try {
       await authenticationController.signUp(theEmail, thePassword);
 
@@ -73,7 +77,7 @@ class _FirebaseSignUpState extends State<SignUp> {
                           },
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         TextFormField(
                           controller: controllerPassword,
@@ -91,7 +95,63 @@ class _FirebaseSignUpState extends State<SignUp> {
                           },
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
+                        ),
+                        TextFormField(
+                          controller: controllerFirstName,
+                          decoration:
+                              const InputDecoration(labelText: "First Name"),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Enter first name";
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          controller: controllerLastName,
+                          decoration:
+                              const InputDecoration(labelText: "Last Name"),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Enter last name";
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          controller: controllerBirthDate,
+                          decoration:
+                              const InputDecoration(labelText: "Birth Date"),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Enter birth date";
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          controller: controllerCourse,
+                          decoration:
+                              const InputDecoration(labelText: "Course"),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Enter course";
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
                         ),
                         TextButton(
                             onPressed: () async {
@@ -101,8 +161,13 @@ class _FirebaseSignUpState extends State<SignUp> {
                               FocusScope.of(context).requestFocus(FocusNode());
                               if (_formKey.currentState!.validate()) {
                                 logInfo('SignUp validation form ok');
-                                await _signup(controllerEmail.text,
-                                    controllerPassword.text);
+                                await _signup(
+                                    controllerEmail.text,
+                                    controllerPassword.text,
+                                    controllerFirstName.text,
+                                    controllerLastName.text,
+                                    controllerBirthDate.text,
+                                    controllerCourse.text);
                               } else {
                                 logError('SignUp validation form nok');
                               }
