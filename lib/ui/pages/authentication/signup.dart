@@ -20,6 +20,7 @@ class _FirebaseSignUpState extends State<SignUp> {
   final controllerLastName = TextEditingController();
   final controllerBirthDate = TextEditingController();
   final controllerCourse = TextEditingController();
+  final controllerSchool = TextEditingController();
   AuthenticationController authenticationController = Get.find();
   UserController userController = Get.find();
 
@@ -147,6 +148,20 @@ class _FirebaseSignUpState extends State<SignUp> {
                         const SizedBox(
                           height: 10,
                         ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          controller: controllerSchool,
+                          decoration:
+                              const InputDecoration(labelText: "School"),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Enter School name";
+                            }
+                            return null;
+                          },
+                        ),
                         TextButton(
                             onPressed: () async {
                               final form = _formKey.currentState;
@@ -163,7 +178,7 @@ class _FirebaseSignUpState extends State<SignUp> {
                                     course: controllerCourse.text,
                                     password: controllerPassword.text,
                                     difficult: "1",
-                                    school: "uninorte"));
+                                    school: controllerSchool.text));
                                 Get.back();
                               } else {
                                 logError('SignUp validation form nok');

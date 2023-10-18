@@ -4,7 +4,7 @@ import '../../../domain/models/user.dart';
 import 'package:http/http.dart' as http;
 
 class UserDataSource {
-  final String apiKey = 'i9c13B';
+  final String apiKey = '1pynEv';
 
   Future<bool> getUser(String email, String password) async {
     logInfo("Web service, verifying user");
