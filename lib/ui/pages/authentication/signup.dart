@@ -1,3 +1,5 @@
+import 'package:f_web_authentication/domain/models/user.dart';
+import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
@@ -19,27 +21,7 @@ class _FirebaseSignUpState extends State<SignUp> {
   final controllerBirthDate = TextEditingController();
   final controllerCourse = TextEditingController();
   AuthenticationController authenticationController = Get.find();
-
-  _signup(theEmail, thePassword, firstName, lastName, birthDate, course) async {
-    try {
-      await authenticationController.signUp(theEmail, thePassword);
-
-      Get.snackbar(
-        "Sign Up",
-        'OK',
-        icon: const Icon(Icons.person, color: Colors.red),
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    } catch (err) {
-      logError('SignUp error $err');
-      Get.snackbar(
-        "Sign Up",
-        err.toString(),
-        icon: const Icon(Icons.person, color: Colors.red),
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
-  }
+  UserController userController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -161,13 +143,15 @@ class _FirebaseSignUpState extends State<SignUp> {
                               FocusScope.of(context).requestFocus(FocusNode());
                               if (_formKey.currentState!.validate()) {
                                 logInfo('SignUp validation form ok');
-                                await _signup(
-                                    controllerEmail.text,
-                                    controllerPassword.text,
-                                    controllerFirstName.text,
-                                    controllerLastName.text,
-                                    controllerBirthDate.text,
-                                    controllerCourse.text);
+                                await userController.addUser(User(
+                                    email: controllerEmail.text,
+                                    firstName: controllerFirstName.text,
+                                    lastName: controllerLastName.text,
+                                    birthday: controllerBirthDate.text,
+                                    course: controllerCourse.text,
+                                    password: controllerPassword.text,
+                                    difficult: "1"));
+                                Get.back();
                               } else {
                                 logError('SignUp validation form nok');
                               }

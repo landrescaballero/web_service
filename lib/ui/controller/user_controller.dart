@@ -10,12 +10,6 @@ class UserController extends GetxController {
 
   List<User> get users => _users;
 
-  @override
-  void onInit() {
-    getUers();
-    super.onInit();
-  }
-
   getUers() async {
     logInfo("Getting users");
     _users.value = await userUseCase.getUsers();

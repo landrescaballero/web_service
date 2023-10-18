@@ -70,8 +70,9 @@ class _NewUserPageState extends State<NewUserPage> {
                                 firstName: controllerFirstName.text,
                                 lastName: controllerLastName.text,
                                 birthday: '',
-                                course: 1,
-                                password: ''));
+                                course: "1",
+                                password: '',
+                                difficult: "1"));
                             Get.back();
                           },
                           child: const Text("Save")))
