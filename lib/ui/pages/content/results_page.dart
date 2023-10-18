@@ -1,6 +1,9 @@
+import 'package:f_web_authentication/domain/models/history.dart';
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
+import 'package:f_web_authentication/ui/controller/history_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
+import 'package:f_web_authentication/ui/controller/player_controller.dart';
 import 'package:f_web_authentication/ui/controller/time_controller.dart';
 import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:f_web_authentication/ui/pages/content/congrats.dart';
@@ -24,6 +27,8 @@ class _ResultState extends State<ResultPage> {
   OperationGeneratorController opGenController = Get.find();
   DifficultyController diffController = Get.find();
   TimerController timerController = Get.find();
+  HistoryController _historyController=Get.find();
+  PlayerController playerController= Get.find();
 
   _logout() async {
     try {
@@ -106,6 +111,15 @@ class _ResultState extends State<ResultPage> {
       floatingActionButton: FilledButton(
         onPressed: () async {
           logInfo("new operations");
+          await _historyController.saveHis(
+            History(time: timerController.getTime(),
+            email: playerController.email.value,
+            question1: operationController.getAnswer(0),
+            question2: operationController.getAnswer(1),
+            question3: operationController.getAnswer(2),
+            question4: operationController.getAnswer(3),
+            question5: operationController.getAnswer(4),
+            question6: operationController.getAnswer(5),));
           if (diffController.nivelUp()) {
             Get.to(() => const CongratulationPage());
           } else {

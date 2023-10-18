@@ -1,3 +1,4 @@
+import 'package:f_web_authentication/domain/models/history.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
 
@@ -23,7 +24,13 @@ class UserUseCase {
 
   Future<void> updateUser() async => await _repository.updateUser();
 
-  deleteUser(int id) async => await _repository.deleteUser(id);
+  Future<void> saveHis(History his) async{
+  logInfo("Saving in repository");
+  await _repository.saveHis(his);}
 
-  simulateProcess() async => await _repository.simulateProcess();
+  Future<List> getHis(String email) async{
+  logInfo("Saving in repository");
+  return await _repository.getHis(email);}
+
+  deleteUser(int id) async => await _repository.deleteUser(id);
 }

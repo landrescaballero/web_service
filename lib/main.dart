@@ -1,6 +1,7 @@
 import 'package:f_web_authentication/data/datasources/remote/models/some_data_db.dart';
 import 'package:f_web_authentication/domain/use_case/user_usecase.dart';
 import 'package:f_web_authentication/ui/central.dart';
+import 'package:f_web_authentication/ui/controller/history_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
 import 'package:f_web_authentication/ui/controller/player_controller.dart';
@@ -11,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:loggy/loggy.dart';
 
+import 'data/datasources/remote/history_datasource.dart';
 import 'domain/repositories/repository.dart';
 import 'domain/use_case/authentication_usecase.dart';
 import 'ui/controller/difficulty_controller.dart';
@@ -34,8 +36,10 @@ void main() async{
   Get.put(PlayerController());
   Get.put(Repository());
   Get.put(AuthenticationUseCase());
+  Get.put(HistorySource());
   Get.put(UserUseCase());
   Get.put(UserController());
+  Get.put(HistoryController());
   Get.put(TimerController());
   Get.put(DifficultyController());
   Get.put(OperationController());

@@ -1,11 +1,14 @@
 import 'package:f_web_authentication/data/datasources/remote/authentication_datasource.dart';
+import 'package:f_web_authentication/domain/models/history.dart';
 
+import '../../data/datasources/remote/history_datasource.dart';
 import '../../data/datasources/remote/user_datasource.dart';
 import '../models/user.dart';
 
 class Repository {
   late AuthenticationDatatasource _authenticationDataSource;
   late UserDataSource _userDatatasource;
+  late HistorySource _historyDatatasource;
   String token = "";
 
   // the base url of the API should end without the /
@@ -15,6 +18,7 @@ class Repository {
   Repository() {
     _authenticationDataSource = AuthenticationDatatasource();
     _userDatatasource = UserDataSource();
+    _historyDatatasource= HistorySource();
   }
 
   Future<bool> login(String email, String password) async {
@@ -41,6 +45,8 @@ class Repository {
   Future<bool> deleteUser(int id) async =>
       await _userDatatasource.deleteUser(id);
 
-  Future<bool> simulateProcess() async =>
-      await _userDatatasource.simulateProcess(_baseUrl, token);
+  Future<bool> saveHis(History his) async =>await _historyDatatasource.saveSession(his);
+  Future<List> getHis(String email) async =>await _historyDatatasource.getHis(email);
+
+  
 }

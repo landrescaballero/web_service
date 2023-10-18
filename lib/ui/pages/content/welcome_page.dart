@@ -4,6 +4,7 @@ import 'package:f_web_authentication/ui/controller/operation_controller.dart';
 import 'package:f_web_authentication/ui/controller/player_controller.dart';
 import 'package:f_web_authentication/ui/controller/time_controller.dart';
 import 'package:f_web_authentication/ui/controller/user_controller.dart';
+import 'package:f_web_authentication/ui/pages/content/history_page.dart';
 import 'package:f_web_authentication/ui/pages/content/operations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,7 +37,11 @@ class _WelcomeState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Welcome"), actions: [
-        IconButton(
+            IconButton(
+            icon: const Icon(Icons.history),
+            onPressed: () {
+              Get.to(const HistoryPage());
+            }),IconButton(
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {
               _logout();
