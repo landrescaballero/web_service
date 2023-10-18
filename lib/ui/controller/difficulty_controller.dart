@@ -1,6 +1,8 @@
+import 'package:f_web_authentication/ui/controller/time_controller.dart';
 import 'package:get/get.dart';
 
 class DifficultyController extends GetxController {
+  TimerController timerController = Get.find();
   RxInt correctAnswers = 0.obs;
   RxInt incorrectAnswers = 0.obs;
   RxInt difficulty = 1.obs;
@@ -15,7 +17,8 @@ class DifficultyController extends GetxController {
 
   void calculateDifficulty() {
     if (correctAnswers.value >= incorrectAnswers.value + 6 &&
-        correctAnswers.value >= 6) {
+        correctAnswers.value >= 6 &&
+        timerController.elapsedTime.value.inSeconds > 300) {
       difficulty++;
       correctAnswers.value = 0;
       incorrectAnswers.value = 0;
@@ -24,7 +27,8 @@ class DifficultyController extends GetxController {
 
   bool nivelUp() {
     if (correctAnswers.value >= incorrectAnswers.value + 6 &&
-        correctAnswers.value >= 6) {
+        correctAnswers.value >= 6 &&
+        timerController.elapsedTime.value.inSeconds > 300) {
       calculateDifficulty();
       return true;
     } else {

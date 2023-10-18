@@ -3,6 +3,7 @@ import 'package:f_web_authentication/ui/central.dart';
 import 'package:f_web_authentication/ui/controller/authentication_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
+import 'package:f_web_authentication/ui/controller/time_controller.dart';
 import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,6 +28,7 @@ void main() {
   Get.put(DifficultyController());
   Get.put(OperationController());
   Get.put(OperationGeneratorController());
+  Get.put(TimerController());
   runApp(const MyApp());
 }
 

@@ -2,6 +2,7 @@ import 'package:f_web_authentication/ui/controller/authentication_controller.dar
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
+import 'package:f_web_authentication/ui/controller/time_controller.dart';
 import 'package:f_web_authentication/ui/pages/content/operations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,7 @@ class _WelcomeState extends State<WelcomePage> {
   DifficultyController diffController = Get.find();
   OperationController operationController = Get.find();
   OperationGeneratorController opGenController = Get.find();
+  TimerController timerController = Get.find();
 
   _logout() async {
     try {
@@ -44,13 +46,13 @@ class _WelcomeState extends State<WelcomePage> {
         const SizedBox(height: 40),
         Text("Nivel Actual: ${diffController.difficulty.value}",
             style: const TextStyle(fontSize: 20)),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Text("Respuestas correctas: ${diffController.correctAnswers.value}",
             style: const TextStyle(
               fontSize: 20,
               color: Colors.green,
             )),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Text("Respuestas incorrectas: ${diffController.incorrectAnswers.value}",
             style: const TextStyle(
               fontSize: 20,
@@ -63,10 +65,10 @@ class _WelcomeState extends State<WelcomePage> {
           operationController.reset();
           operationController.begin();
           opGenController.generateRandomOperation();
+          timerController.startTimer();
           Get.to(() => Operations());
         },
         child: const Text("Iniciar"),
-        
       ),
     );
   }

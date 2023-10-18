@@ -30,12 +30,8 @@ class OperationGeneratorController extends GetxController {
   int generateNumber1(int i) {
     int difficulty = difficultyController.difficulty.value;
     final random = Random();
-    if (operator[i] != '*') {
-      if (difficulty % 2 == 0) {
-        return random.nextInt(100) + 1;
-      } else {
-        return random.nextInt(10) + 1;
-      }
+    if (difficulty % 2 == 0) {
+      return random.nextInt(100) + 1;
     } else {
       return random.nextInt(10) + 1;
     }

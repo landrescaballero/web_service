@@ -1,5 +1,6 @@
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
+import 'package:f_web_authentication/ui/controller/time_controller.dart';
 import 'package:f_web_authentication/ui/pages/content/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ class _Operations extends State<Operations> {
   AuthenticationController authenticationController = Get.find();
   OperationController operationController = Get.find();
   DifficultyController difController = Get.find();
+  TimerController timerController = Get.find();
 
   _logout() async {
     try {
@@ -41,6 +43,17 @@ class _Operations extends State<Operations> {
       ]),
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Obx(() => Text(
+                  minutero(timerController.elapsedTime.value.inSeconds),
+                  style: const TextStyle(fontSize: 24),
+                )),
+            const SizedBox(width: 20),
+          ],
+        ),
+        const SizedBox(height: 20),
         Container(
             width: 200,
             height: 100,
@@ -158,6 +171,7 @@ class _Operations extends State<Operations> {
                 }
                 difController.incrementCorrectAnswers(numC);
                 difController.incrementIncorrectAnswers(6 - numC);
+                timerController.stopTimer();
                 Get.to(const ResultPage());
                 _logout();
               }
@@ -166,4 +180,18 @@ class _Operations extends State<Operations> {
       ])
     ]);
   }
+}
+
+String minutero(int minutos) {
+  int minutos2 = minutos ~/ 60;
+  int segundos = minutos % 60;
+  String min = minutos2.toString();
+  String seg = segundos.toString();
+  if (minutos2 < 10) {
+    min = "0$minutos2";
+  }
+  if (segundos < 10) {
+    seg = "0$segundos";
+  }
+  return "$min:$seg";
 }

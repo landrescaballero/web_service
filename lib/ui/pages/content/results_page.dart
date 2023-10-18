@@ -2,6 +2,7 @@ import 'package:f_web_authentication/ui/controller/authentication_controller.dar
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
+import 'package:f_web_authentication/ui/controller/time_controller.dart';
 import 'package:f_web_authentication/ui/pages/content/congrats.dart';
 import 'package:f_web_authentication/ui/pages/content/welcome_page.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class _ResultState extends State<ResultPage> {
   OperationController operationController = Get.find();
   OperationGeneratorController opGenController = Get.find();
   DifficultyController diffController = Get.find();
+  TimerController timerController = Get.find();
 
   _logout() async {
     try {
@@ -90,6 +92,14 @@ class _ResultState extends State<ResultPage> {
           ),
           respuesta(operationController.getAnswer(5))
         ]),
+        const SizedBox(height: 10),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Text(
+            "Tiempo Transcurrido: ${minutero(timerController.elapsedTime.value.inSeconds)}",
+            style: const TextStyle(fontSize: 20),
+          ),
+          respuesta(operationController.getAnswer(5))
+        ]),
       ])),
       floatingActionButton: FilledButton(
         onPressed: () async {
@@ -113,4 +123,18 @@ Widget respuesta(bool a) {
   } else {
     return const Icon(Icons.indeterminate_check_box, color: Colors.red);
   }
+}
+
+String minutero(int minutos) {
+  int minutos2 = minutos ~/ 60;
+  int segundos = minutos % 60;
+  String min = minutos2.toString();
+  String seg = segundos.toString();
+  if (minutos2 < 10) {
+    min = "0$minutos2";
+  }
+  if (segundos < 10) {
+    seg = "0$segundos";
+  }
+  return "$min:$seg";
 }
