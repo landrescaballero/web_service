@@ -155,7 +155,8 @@ class _FirebaseSignUpState extends State<SignUp> {
                                     birthday: controllerBirthDate.text,
                                     course: controllerCourse.text,
                                     password: controllerPassword.text,
-                                    difficult: "1"));
+                                    difficult: "1",
+                                    school: "uninorte"));
                                 Get.back();
                               } else {
                                 logError('SignUp validation form nok');
