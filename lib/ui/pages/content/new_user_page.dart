@@ -68,7 +68,10 @@ class _NewUserPageState extends State<NewUserPage> {
                             await userController.addUser(User(
                                 email: controllerEmail.text,
                                 firstName: controllerFirstName.text,
-                                lastName: controllerLastName.text));
+                                lastName: controllerLastName.text,
+                                birthday: '',
+                                course: 1,
+                                password: ''));
                             Get.back();
                           },
                           child: const Text("Save")))

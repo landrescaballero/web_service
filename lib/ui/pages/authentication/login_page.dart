@@ -111,20 +111,20 @@ class _LoginPageState extends State<LoginPage> {
                           opGenController.generateRandomOperation();
                         }
                       },
-                      child: const Text("Submit"),
                       style: OutlinedButton.styleFrom(
-                        minimumSize: Size(100, 50),
+                        minimumSize: const Size(100, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                               10), // establece la forma del botón
                         ),
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           color: Colors
                               .black, // establece el color del texto del botón
                           fontSize:
                               20, // establece el tamaño de fuente del texto del botón
                         ),
                       ),
+                      child: const Text("Submit"),
                     ),
                   ]),
             ),
@@ -133,19 +133,19 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const SignUp()));
                 },
-                child: const Text("Create account"),
                 style: OutlinedButton.styleFrom(
-                  minimumSize: Size(100, 50),
+                  minimumSize: const Size(100, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                         10), // establece la forma del botón
                   ),
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     color:
                         Colors.black, // establece el color del texto del botón
                     fontSize: 20,
                   ),
-                ))
+                ),
+                child: const Text("Create account"))
           ],
         ),
       ),

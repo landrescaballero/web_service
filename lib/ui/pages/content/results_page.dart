@@ -107,9 +107,9 @@ class _ResultState extends State<ResultPage> {
         onPressed: () async {
           logInfo("new operations");
           if (diffController.nivelUp()) {
-            Get.to(() => CongratulationPage());
+            Get.to(() => const CongratulationPage());
           } else {
-            Get.to(() => WelcomePage());
+            Get.to(() => const WelcomePage());
           }
         },
         child: const Text("Empezar de nuevo"),

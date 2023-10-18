@@ -46,7 +46,7 @@ class _CongratulationState extends State<CongratulationPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           logInfo("new operations");
-          Get.to(() => WelcomePage());
+          Get.to(() => const WelcomePage());
         },
         child: const Text("OK"),
       ),

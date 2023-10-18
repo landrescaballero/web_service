@@ -72,7 +72,10 @@ class _EditUserPageState extends State<EditUserPage> {
                                 id: user.id,
                                 email: controllerEmail.text,
                                 firstName: controllerFirstName.text,
-                                lastName: controllerLastName.text));
+                                lastName: controllerLastName.text,
+                                birthday: '',
+                                course: 1,
+                                password: ''));
                             Get.back();
                           },
                           child: const Text("Update")))
