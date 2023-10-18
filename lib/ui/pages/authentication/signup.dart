@@ -175,7 +175,7 @@ class _FirebaseSignUpState extends State<SignUp> {
 }
 
 bool isValidDateFormat(String input) {
-  final datePattern = r'^\d{2}/\d{2}/\d{4}$';
+  const datePattern = r'^\d{2}/\d{2}/\d{4}$';
   if (RegExp(datePattern).hasMatch(input)) {
     final parts = input.split('/');
     final day = int.tryParse(parts[0]);

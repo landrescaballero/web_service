@@ -1,8 +1,8 @@
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
+import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
-import '../../controller/authentication_controller.dart';
 import 'signup.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,13 +16,21 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final controllerEmail = TextEditingController(text: 'a@a.com');
   final controllerPassword = TextEditingController(text: '123456');
-  AuthenticationController authenticationController = Get.find();
   OperationGeneratorController opGenController = Get.find();
+  UserController userController = Get.find();
 
   _login(theEmail, thePassword) async {
     logInfo('_login $theEmail $thePassword');
     try {
-      await authenticationController.login(theEmail, thePassword);
+      bool a = await userController.getUser(theEmail, thePassword);
+      if (!a) {
+        Get.snackbar(
+          "Correo o contraseña",
+          "Invalida",
+          icon: const Icon(Icons.person, color: Colors.blue),
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     } catch (err) {
       Get.snackbar(
         "Login",

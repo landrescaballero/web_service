@@ -1,8 +1,8 @@
-import 'package:f_web_authentication/ui/controller/authentication_controller.dart';
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
 import 'package:f_web_authentication/ui/controller/time_controller.dart';
+import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:f_web_authentication/ui/pages/content/congrats.dart';
 import 'package:f_web_authentication/ui/pages/content/welcome_page.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class ResultPage extends StatefulWidget {
 }
 
 class _ResultState extends State<ResultPage> {
-  AuthenticationController authenticationController = Get.find();
+  UserController userController = Get.find();
   OperationController operationController = Get.find();
   OperationGeneratorController opGenController = Get.find();
   DifficultyController diffController = Get.find();
@@ -27,7 +27,7 @@ class _ResultState extends State<ResultPage> {
 
   _logout() async {
     try {
-      await authenticationController.logOut();
+      await userController.logOut();
     } catch (e) {
       logInfo(e);
     }
