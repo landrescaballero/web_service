@@ -40,6 +40,9 @@ class Repository {
   Future<bool> addUser(User user) async =>
       await _userDatatasource.addUser(user);
 
+  Future<List> getAllusers()async  =>
+      await _userDatatasource.getAll();
+
   Future<bool> updateUser() async => await _userDatatasource.updateUser();
 
   Future<bool> deleteUser(int id) async =>
