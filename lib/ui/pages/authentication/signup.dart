@@ -115,6 +115,11 @@ class _FirebaseSignUpState extends State<SignUp> {
                             if (value!.isEmpty) {
                               return "Enter birth date";
                             }
+
+                            if (!isValidDateFormat(value)) {
+                              return "Enter a valid date in DD/MM/YYYY format";
+                            }
+
                             return null;
                           },
                         ),
@@ -161,3 +166,21 @@ class _FirebaseSignUpState extends State<SignUp> {
                 ))));
   }
 }
+bool isValidDateFormat(String input) {
+  final datePattern = r'^\d{2}/\d{2}/\d{4}$';
+  if (RegExp(datePattern).hasMatch(input)) {
+    final parts = input.split('/');
+    final day = int.tryParse(parts[0]);
+    final month = int.tryParse(parts[1]);
+    final year = int.tryParse(parts[2]);
+    
+    if (day != null && month != null && year != null) {
+      if (day >= 1 && day <= 31 && month >= 1 && month <= 12) {
+        // Consider checking for valid years, e.g., if you want to restrict the range.
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
