@@ -32,6 +32,10 @@ Future<bool> getUserLocal(String email, String password) async {
   Future<void> addUserLocal(User user) async => await _localDataSource.addElement(user);
 
   Future<void> updateUser() async => await _repository.updateUser();
+  Future<void> updateUserLocal( ) async => await _localDataSource.updateEntry();
+
+  Future<List> getAllusers() async => await _repository.getAllusers();
+  Future<List> getAllusersLocal() async => await _localDataSource.getAll();
 
   deleteUser(int id) async => await _repository.deleteUser(id);
 

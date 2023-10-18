@@ -1,9 +1,11 @@
 import 'dart:convert';
+
 import 'package:f_web_authentication/ui/controller/player_controller.dart';
 import 'package:get/get.dart';
-import 'package:loggy/loggy.dart';
-import '../../../domain/models/user.dart';
 import 'package:http/http.dart' as http;
+import 'package:loggy/loggy.dart';
+
+import '../../../domain/models/user.dart';
 
 class UserDataSource {
   final String apiKey = 'wiZQez';
@@ -35,15 +37,14 @@ class UserDataSource {
 
   Future<bool> verifyUser(String email) async {
     logInfo("Web service, verifying user");
-    var request = Uri.parse(
-        "https://retoolapi.dev/$apiKey/data?email=$email");
+    var request = Uri.parse("https://retoolapi.dev/$apiKey/data?email=$email");
 
     var response = await http.get(request);
 
     if (response.statusCode == 200) {
       //logInfo(response.body);
       final data = jsonDecode(response.body);
-      
+
       if (data.length > 0) {
         logInfo("User verified");
         return Future.value(true);
@@ -73,6 +74,23 @@ class UserDataSource {
     } else {
       logError("Got error code ${response.statusCode}");
       return Future.value(false);
+    }
+  }
+  //obtener todos los usuarios de la base de datos
+
+  Future<List> getAll() async {
+    logInfo("Web service, getting all users");
+    var request = Uri.parse("https://retoolapi.dev/$apiKey/data");
+
+    var response = await http.get(request);
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      logInfo("All users retrieved");
+      return Future.value(data);
+    } else {
+      logError("Got error code ${response.statusCode}");
+      return Future.value([]);
     }
   }
 

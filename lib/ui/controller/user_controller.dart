@@ -13,7 +13,7 @@ class UserController extends GetxController {
   Future<void> logOut() async {
     logged.value = false;
   }
-
+ 
   Future<bool> getUser(String email, String password) async {
     logInfo("Getting users");
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -21,6 +21,7 @@ class UserController extends GetxController {
       // Offline: Retrieve game sessions from local storage
       logInfo("You are OFFLINE, getting from local");
       // logged.value = await userUseCase.getUserLocal(email, password);
+      logged.value = await userUseCase.getUserLocal(email, password);
       return logged.value;
     } else {
       // Online: Retrieve game sessions from the web service
@@ -29,7 +30,8 @@ class UserController extends GetxController {
       return logged.value;
     }
   }
-
+  //obtener todos los usuarios de la base de datos
+  
   Future<bool> verifyUser(String email) async {
     logInfo("Getting users");
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -62,7 +64,16 @@ class UserController extends GetxController {
 
   updateUser() async {
     logInfo("Update user");
-    await userUseCase.updateUser();
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      // Offline: Retrieve game sessions from local storage
+      logInfo("You are OFFLINE, add user in local");
+      await userUseCase.updateUserLocal();
+    } else {
+      // Online: Retrieve game sessions from the web service
+      logInfo("You are ONLINE, add user in web");
+      await userUseCase.updateUser();
+    }
   }
 
   void deleteUser(int id) async {

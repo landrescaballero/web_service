@@ -1,8 +1,13 @@
 import 'package:f_web_authentication/data/datasources/remote/models/some_data_db.dart';
 import 'package:f_web_authentication/domain/models/user.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
+import '../ui/controller/player_controller.dart';
+
 class LocalDataSource {
+    PlayerController playerController = Get.find();
+
   Future<void> addElement(User entry) async {
     Hive.box('user').add(SomeData(
         correo: entry.email,
@@ -52,15 +57,18 @@ class LocalDataSource {
   Future<void> deleteEntry(User entry) async {
     Hive.box('user').deleteAt(entry.id!);
   }
-  Future<void> updateEntry(User entry) async {
-    Hive.box('user').put(entry.id!, User(
-        email: entry.email,
-        firstName: entry.firstName,
-        lastName: entry.lastName,
-        birthday: entry.birthday,
-        course: entry.course,
-        password: entry.password,
-        difficult: entry.difficult,
-        school: entry.school));
+
+  //actulizare la informacion del usuario apartir de playercontroller
+
+  Future<void> updateEntry() async {
+    Hive.box('user').put(playerController.id, User(
+        email: playerController.email.value,
+        firstName: playerController.firstName.value,
+        lastName: playerController.lastName.value,
+        birthday: playerController.birthday.value,
+        course: playerController.course.value,
+        password: playerController.password.value,
+        difficult: playerController.difficult.value.toString(),
+        school: playerController.school.value));
   }
 }
