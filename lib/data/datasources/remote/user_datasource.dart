@@ -33,6 +33,29 @@ class UserDataSource {
     }
   }
 
+  Future<bool> verifyUser(String email) async {
+    logInfo("Web service, verifying user");
+    var request = Uri.parse(
+        "https://retoolapi.dev/$apiKey/data?email=$email");
+
+    var response = await http.get(request);
+
+    if (response.statusCode == 200) {
+      //logInfo(response.body);
+      final data = jsonDecode(response.body);
+      
+      if (data.length > 0) {
+        logInfo("User verified");
+        return Future.value(true);
+      } else {
+        return Future.value(false);
+      }
+    } else {
+      logError("Got error code ${response.statusCode}");
+      return Future.value(false);
+    }
+  }
+
   Future<bool> addUser(User user) async {
     logInfo("Web service, Adding user");
 

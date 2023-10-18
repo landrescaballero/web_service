@@ -14,6 +14,11 @@ class UserUseCase {
     return await _repository.getUser(email, password);
   }
 
+  Future<bool> verifyUser(String email) async {
+    logInfo("Getting users  from UseCase");
+    return await _repository.verifyUser(email);
+  }
+
   Future<void> addUser(User user) async => await _repository.addUser(user);
 
   Future<void> updateUser() async => await _repository.updateUser();

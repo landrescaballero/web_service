@@ -3,7 +3,6 @@ import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
-import '../../controller/authentication_controller.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -21,7 +20,6 @@ class _FirebaseSignUpState extends State<SignUp> {
   final controllerBirthDate = TextEditingController();
   final controllerCourse = TextEditingController();
   final controllerSchool = TextEditingController();
-  AuthenticationController authenticationController = Get.find();
   UserController userController = Get.find();
 
   @override
@@ -170,7 +168,16 @@ class _FirebaseSignUpState extends State<SignUp> {
                               FocusScope.of(context).requestFocus(FocusNode());
                               if (_formKey.currentState!.validate()) {
                                 logInfo('SignUp validation form ok');
-                                await userController.addUser(User(
+                                bool userexists= await userController.verifyUser(controllerEmail.text);
+                                if(userexists){
+                                  Get.snackbar(
+                                "Correo existente",
+                                "Intenta nuevamente con otro correo",
+                                icon: const Icon(Icons.person, color: Colors.red),
+                                snackPosition: SnackPosition.BOTTOM,
+                              );
+                                }else{
+                                  await userController.addUser(User(
                                     email: controllerEmail.text,
                                     firstName: controllerFirstName.text,
                                     lastName: controllerLastName.text,
@@ -180,6 +187,7 @@ class _FirebaseSignUpState extends State<SignUp> {
                                     difficult: "1",
                                     school: controllerSchool.text));
                                 Get.back();
+                                }
                               } else {
                                 logError('SignUp validation form nok');
                               }

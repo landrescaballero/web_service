@@ -19,6 +19,12 @@ class UserController extends GetxController {
     return logged.value;
   }
 
+  Future<bool> verifyUser(String email) async {
+    logInfo("Getting users");
+    logged.value = await userUseCase.verifyUser(email);
+    return logged.value;
+  }
+
   addUser(User user) async {
     logInfo("Add user");
     await userUseCase.addUser(user);

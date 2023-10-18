@@ -30,6 +30,9 @@ class Repository {
   Future<bool> getUser(String email, String password) async =>
       await _userDatatasource.getUser(email, password);
 
+  Future<bool> verifyUser(String email) async =>
+      await _userDatatasource.verifyUser(email);
+
   Future<bool> addUser(User user) async =>
       await _userDatatasource.addUser(user);
 

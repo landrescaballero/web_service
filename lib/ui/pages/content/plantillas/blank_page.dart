@@ -1,4 +1,4 @@
-import 'package:f_web_authentication/ui/controller/authentication_controller.dart';
+import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
@@ -11,11 +11,11 @@ class Page extends StatefulWidget {
 }
 
 class _State extends State<Page> {
-  AuthenticationController authenticationController = Get.find();
+  UserController userController = Get.find();
 
   _logout() async {
     try {
-      await authenticationController.logOut();
+      await userController.logOut();
     } catch (e) {
       logInfo(e);
     }
