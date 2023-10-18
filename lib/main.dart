@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:loggy/loggy.dart';
 
+import 'data/local_data_source.dart';
 import 'domain/repositories/repository.dart';
 import 'domain/use_case/authentication_usecase.dart';
 import 'ui/controller/difficulty_controller.dart';
@@ -33,6 +34,7 @@ void main() async{
 
   Get.put(PlayerController());
   Get.put(Repository());
+  Get.put(LocalDataSource());
   Get.put(AuthenticationUseCase());
   Get.put(UserUseCase());
   Get.put(UserController());

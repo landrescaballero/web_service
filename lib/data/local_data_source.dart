@@ -3,16 +3,35 @@ import 'package:f_web_authentication/domain/models/user.dart';
 import 'package:hive/hive.dart';
 
 class LocalDataSource {
-  Future<void> addElement(User Entry) async {
+  Future<void> addElement(User entry) async {
     Hive.box('user').add(SomeData(
-        correo: Entry.email,
-        firstName: Entry.firstName,
-        lastName: Entry.lastName,
-        birthday: Entry.birthday,
-        course: Entry.course,
-        password: Entry.password,
-        difficult: Entry.difficult,
-        school: Entry.school));
+        correo: entry.email,
+        firstName: entry.firstName,
+        lastName: entry.lastName,
+        birthday: entry.birthday,
+        course: entry.course,
+        password: entry.password,
+        difficult: entry.difficult,
+        school: entry.school));
+  }
+  Future<bool> getUser(String email, String password) async {
+    List<User> usuarios = await getAll();
+    for (var i = 0; i < usuarios.length; i++) {
+      if (usuarios[i].email == email && usuarios[i].password == password) {
+        return Future.value(true);
+      }
+    }
+    return Future.value(false);
+  }
+  //verificar que el correo no este registrado
+  Future<bool> verifyUser(String email) async {
+    List<User> usuarios = await getAll();
+    for (var i = 0; i < usuarios.length; i++) {
+      if (usuarios[i].email == email) {
+        return Future.value(true);
+      }
+    }
+    return Future.value(false);
   }
   Future<List<User>> getAll() async {
     return Hive.box('user').values.map((e) => User(
