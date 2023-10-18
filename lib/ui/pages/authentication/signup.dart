@@ -134,6 +134,13 @@ class _FirebaseSignUpState extends State<SignUp> {
                             if (value!.isEmpty) {
                               return "Enter course";
                             }
+
+                            final course = int.tryParse(value);
+
+                            if (course == null || course < 1 || course > 11) {
+                              return "Enter a valid course (1-11)";
+                            }
+
                             return null;
                           },
                         ),
