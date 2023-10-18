@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
 
+import '../../../utils.dart';
+
 class ResultPage extends StatefulWidget {
   const ResultPage({super.key});
 
@@ -95,10 +97,10 @@ class _ResultState extends State<ResultPage> {
         const SizedBox(height: 10),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
-            "Tiempo Transcurrido: ${minutero(timerController.elapsedTime.value.inSeconds)}",
+            "Tiempo Transcurrido: ${minutero(timerController.getTime())} ",
             style: const TextStyle(fontSize: 20),
           ),
-          respuesta(operationController.getAnswer(5))
+          respuestamin(timerController.getTime())
         ]),
       ])),
       floatingActionButton: FilledButton(
@@ -125,16 +127,11 @@ Widget respuesta(bool a) {
   }
 }
 
-String minutero(int minutos) {
-  int minutos2 = minutos ~/ 60;
-  int segundos = minutos % 60;
-  String min = minutos2.toString();
-  String seg = segundos.toString();
-  if (minutos2 < 10) {
-    min = "0$minutos2";
+Widget respuestamin(int a) {
+  //si a es true devolver un unico de check verde y si a es false devolver un icono de error rojo
+  if (a < 300) {
+    return const Icon(Icons.check_box, color: Colors.green);
+  } else {
+    return const Icon(Icons.indeterminate_check_box, color: Colors.red);
   }
-  if (segundos < 10) {
-    seg = "0$segundos";
-  }
-  return "$min:$seg";
 }

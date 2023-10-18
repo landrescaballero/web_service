@@ -15,4 +15,12 @@ class TimerController extends GetxController {
   void stopTimer() {
     _timer.cancel();
   }
+
+  int getTime() {
+    return elapsedTime.value.inSeconds;
+  }
+
+  void resetTimer() {
+    elapsedTime.value = Duration.zero;
+  }
 }

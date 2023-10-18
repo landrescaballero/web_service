@@ -25,10 +25,10 @@ void main() {
   Get.put(UserUseCase());
   Get.put(AuthenticationController());
   Get.put(UserController());
+  Get.put(TimerController());
   Get.put(DifficultyController());
   Get.put(OperationController());
   Get.put(OperationGeneratorController());
-  Get.put(TimerController());
   runApp(const MyApp());
 }
 

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
 
+import '../../../utils.dart';
 import '../../controller/authentication_controller.dart';
 import '../../controller/user_controller.dart';
 
@@ -180,18 +181,4 @@ class _Operations extends State<Operations> {
       ])
     ]);
   }
-}
-
-String minutero(int minutos) {
-  int minutos2 = minutos ~/ 60;
-  int segundos = minutos % 60;
-  String min = minutos2.toString();
-  String seg = segundos.toString();
-  if (minutos2 < 10) {
-    min = "0$minutos2";
-  }
-  if (segundos < 10) {
-    seg = "0$segundos";
-  }
-  return "$min:$seg";
 }

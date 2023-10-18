@@ -65,8 +65,9 @@ class _WelcomeState extends State<WelcomePage> {
           operationController.reset();
           operationController.begin();
           opGenController.generateRandomOperation();
+          timerController.resetTimer();
           timerController.startTimer();
-          Get.to(() => Operations());
+          Get.to(() => const Operations());
         },
         child: const Text("Iniciar"),
       ),
