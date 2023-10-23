@@ -2,6 +2,7 @@ import 'package:f_web_authentication/data/datasources/remote/models/some_data_db
 import 'package:f_web_authentication/domain/use_case/user_usecase.dart';
 import 'package:f_web_authentication/ui/central.dart';
 import 'package:f_web_authentication/ui/controller/history_controller.dart';
+import 'package:f_web_authentication/ui/controller/local_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
 import 'package:f_web_authentication/ui/controller/player_controller.dart';
@@ -22,10 +23,11 @@ Future<List<Box>> _openBoxes() async {
   List<Box> boxList = [];
   await Hive.initFlutter();
   Hive.registerAdapter(SomeDataAdapter());
-  boxList.add(await Hive.openBox('user')) ;
+  boxList.add(await Hive.openBox('user'));
   return boxList;
 }
-void main() async{
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _openBoxes();
   Loggy.initLoggy(
@@ -40,6 +42,7 @@ void main() async{
   Get.put(AuthenticationUseCase());
   Get.put(HistorySource());
   Get.put(UserUseCase());
+  Get.put(Local_controller());
   Get.put(UserController());
   Get.put(HistoryController());
   Get.put(TimerController());
