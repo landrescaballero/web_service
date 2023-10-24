@@ -1,4 +1,5 @@
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
+import 'package:f_web_authentication/ui/controller/local_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/player_controller.dart';
 import 'package:f_web_authentication/ui/controller/user_controller.dart';
@@ -18,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final controllerEmail = TextEditingController(text: 'a@a.com');
   final controllerPassword = TextEditingController(text: '123456');
+  Local_controller localController = Get.find();
   OperationGeneratorController opGenController = Get.find();
   UserController userController = Get.find();
   DifficultyController diffController = Get.find();
@@ -49,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    //localController.sync();
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
