@@ -15,17 +15,17 @@ import 'package:loggy/loggy.dart';
 import 'data/datasources/remote/history_datasource.dart';
 import 'data/local_data_source.dart';
 import 'domain/repositories/repository.dart';
-import 'domain/use_case/authentication_usecase.dart';
 import 'ui/controller/difficulty_controller.dart';
 
 Future<List<Box>> _openBoxes() async {
   List<Box> boxList = [];
   await Hive.initFlutter();
   Hive.registerAdapter(SomeDataAdapter());
-  boxList.add(await Hive.openBox('user')) ;
+  boxList.add(await Hive.openBox('user'));
   return boxList;
 }
-void main() async{
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _openBoxes();
   Loggy.initLoggy(
@@ -37,7 +37,6 @@ void main() async{
   Get.put(PlayerController());
   Get.put(Repository());
   Get.put(LocalDataSource());
-  Get.put(AuthenticationUseCase());
   Get.put(HistorySource());
   Get.put(UserUseCase());
   Get.put(UserController());

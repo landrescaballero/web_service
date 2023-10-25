@@ -16,7 +16,7 @@ class HistorySource {
       },
       body: jsonEncode(history.toJson()),
     );
-    
+
     if (response.statusCode == 201) {
       logInfo("Saved");
       return Future.value(true);
@@ -28,9 +28,8 @@ class HistorySource {
 
   Future<List> getHis(String email) async {
     logInfo("Web service, saving history");
-    List<dynamic>data=[];
-    var request = Uri.parse(
-        "https://retoolapi.dev/$apiKey/data?email=$email");
+    List<dynamic> data = [];
+    var request = Uri.parse("https://retoolapi.dev/$apiKey/data?email=$email");
 
     var response = await http.get(request);
 
@@ -43,6 +42,4 @@ class HistorySource {
       return data;
     }
   }
-  
-
 }
