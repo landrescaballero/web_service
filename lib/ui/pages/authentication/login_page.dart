@@ -51,7 +51,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    //localController.sync();
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
