@@ -13,6 +13,7 @@ class Central extends StatelessWidget {
   Widget build(BuildContext context) {
     Local_controller localController = Get.find();
     localController.sync();
+   // localController.syncHis();
 
     UserController userController = Get.find();
     return Obx(() =>

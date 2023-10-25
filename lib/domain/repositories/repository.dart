@@ -1,4 +1,5 @@
 import 'package:f_web_authentication/data/datasources/remote/authentication_datasource.dart';
+import 'package:f_web_authentication/data/datasources/remote/models/local_history.dart';
 import 'package:f_web_authentication/domain/models/history.dart';
 
 import '../../data/datasources/remote/history_datasource.dart';
@@ -50,6 +51,7 @@ class Repository {
 
   Future<bool> saveHis(History his) async =>await _historyDatatasource.saveSession(his);
   Future<List> getHis(String email) async =>await _historyDatatasource.getHis(email);
-
-  
+  Future<bool> verifyhis(int id) async =>await _historyDatatasource.verifyhis(id);
+  Future<List> getAll() async =>await _historyDatatasource.getAll();
+  Future<void>  addelementLocal(LocalHistorial his) async =>await _historyDatatasource.addElement(his);
 }

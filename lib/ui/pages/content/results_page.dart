@@ -147,7 +147,7 @@ Widget respuesta(bool a) {
 
 Widget respuestamin(int a) {
   //si a es true devolver un unico de check verde y si a es false devolver un icono de error rojo
-  if (a < 300) {
+  if (a < 120) {
     return const Icon(Icons.check_box, color: Colors.green);
   } else {
     return const Icon(Icons.indeterminate_check_box, color: Colors.red);
