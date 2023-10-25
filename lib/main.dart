@@ -2,6 +2,7 @@ import 'package:f_web_authentication/data/datasources/remote/models/some_data_db
 import 'package:f_web_authentication/domain/use_case/user_usecase.dart';
 import 'package:f_web_authentication/ui/central.dart';
 import 'package:f_web_authentication/ui/controller/history_controller.dart';
+import 'package:f_web_authentication/ui/controller/local_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
 import 'package:f_web_authentication/ui/controller/player_controller.dart';
@@ -39,6 +40,7 @@ void main() async {
   Get.put(LocalDataSource());
   Get.put(HistorySource());
   Get.put(UserUseCase());
+  Get.put(Local_controller());
   Get.put(UserController());
   Get.put(HistoryController());
   Get.put(TimerController());
