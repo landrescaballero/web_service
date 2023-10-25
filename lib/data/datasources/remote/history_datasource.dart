@@ -36,6 +36,7 @@ class HistorySource {
     if (response.statusCode == 200) {
       //logInfo(response.body);
       final data = jsonDecode(response.body);
+      logInfo(data);
       return data;
     } else {
       logError("Got error code ${response.statusCode}");

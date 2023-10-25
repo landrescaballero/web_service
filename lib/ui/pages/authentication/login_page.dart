@@ -1,4 +1,5 @@
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
+import 'package:f_web_authentication/ui/controller/history_controller.dart';
 import 'package:f_web_authentication/ui/controller/local_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/player_controller.dart';
@@ -24,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   UserController userController = Get.find();
   DifficultyController diffController = Get.find();
   PlayerController playerController = Get.find();
+  HistoryController historyController = Get.find();
 
   _login(theEmail, thePassword) async {
     logInfo('_login $theEmail $thePassword');
@@ -37,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
           snackPosition: SnackPosition.BOTTOM,
         );
       } else {
+        historyController.getHis(playerController.email.value);
         diffController.setDifficulty(playerController.difficult.value);
       }
     } catch (err) {

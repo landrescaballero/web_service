@@ -1,4 +1,6 @@
+import 'package:f_web_authentication/ui/central.dart';
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
+import 'package:f_web_authentication/ui/controller/history_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
 import 'package:f_web_authentication/ui/controller/player_controller.dart';
@@ -24,10 +26,12 @@ class _WelcomeState extends State<WelcomePage> {
   OperationGeneratorController opGenController = Get.find();
   TimerController timerController = Get.find();
   PlayerController playerController = Get.find();
+  HistoryController historyController = Get.find();
 
   _logout() async {
     try {
       await userController.logOut();
+      Get.to(const Central());
     } catch (e) {
       logInfo(e);
     }
@@ -37,11 +41,13 @@ class _WelcomeState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Welcome"), actions: [
-            IconButton(
+        IconButton(
             icon: const Icon(Icons.history),
             onPressed: () {
+              historyController.getHis(playerController.email.value);
               Get.to(const HistoryPage());
-            }),IconButton(
+            }),
+        IconButton(
             icon: const Icon(Icons.exit_to_app),
             onPressed: () {
               _logout();

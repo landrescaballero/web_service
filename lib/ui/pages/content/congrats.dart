@@ -1,3 +1,4 @@
+import 'package:f_web_authentication/ui/central.dart';
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
 import 'package:f_web_authentication/ui/controller/player_controller.dart';
 import 'package:f_web_authentication/ui/controller/user_controller.dart';
@@ -22,6 +23,7 @@ class _CongratulationState extends State<CongratulationPage> {
   _logout() async {
     try {
       await userController.logOut();
+      Get.to(const Central());
     } catch (e) {
       logInfo(e);
     }

@@ -22,7 +22,7 @@ class DifficultyController extends GetxController {
   void calculateDifficulty() {
     if (correctAnswers.value >= incorrectAnswers.value + 6 &&
         correctAnswers.value >= 6 &&
-        timerController.getTime() < 300) {
+        timerController.getTime() < 120) {
       difficulty++;
       correctAnswers.value = 0;
       incorrectAnswers.value = 0;
@@ -32,7 +32,7 @@ class DifficultyController extends GetxController {
   bool nivelUp() {
     if (correctAnswers.value >= incorrectAnswers.value + 6 &&
         correctAnswers.value >= 6 &&
-        timerController.getTime() < 300) {
+        timerController.getTime() < 120) {
       calculateDifficulty();
       return true;
     } else {

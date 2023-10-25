@@ -1,3 +1,4 @@
+import 'package:f_web_authentication/ui/central.dart';
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
 import 'package:f_web_authentication/ui/controller/operation_controller.dart';
 import 'package:f_web_authentication/ui/controller/time_controller.dart';
@@ -25,6 +26,7 @@ class _Operations extends State<Operations> {
   _logout() async {
     try {
       await userController.logOut();
+      Get.to(const Central());
     } catch (e) {
       logInfo(e);
     }
@@ -171,8 +173,8 @@ class _Operations extends State<Operations> {
                 difController.incrementCorrectAnswers(numC);
                 difController.incrementIncorrectAnswers(6 - numC);
                 timerController.stopTimer();
+                logInfo("Sending to results page");
                 Get.to(const ResultPage());
-                _logout();
               }
             },
             child: const Text("OK")),

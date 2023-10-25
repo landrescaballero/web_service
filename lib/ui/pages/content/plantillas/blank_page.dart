@@ -1,3 +1,4 @@
+import 'package:f_web_authentication/ui/central.dart';
 import 'package:f_web_authentication/ui/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ class _State extends State<Page> {
   _logout() async {
     try {
       await userController.logOut();
+      Get.to(const Central());
     } catch (e) {
       logInfo(e);
     }

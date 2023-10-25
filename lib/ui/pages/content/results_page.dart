@@ -1,4 +1,5 @@
 import 'package:f_web_authentication/domain/models/history.dart';
+import 'package:f_web_authentication/ui/central.dart';
 import 'package:f_web_authentication/ui/controller/difficulty_controller.dart';
 import 'package:f_web_authentication/ui/controller/history_controller.dart';
 import 'package:f_web_authentication/ui/controller/op_gen_controller.dart';
@@ -33,6 +34,7 @@ class _ResultState extends State<ResultPage> {
   _logout() async {
     try {
       await userController.logOut();
+      Get.to(const Central());
     } catch (e) {
       logInfo(e);
     }
@@ -121,6 +123,7 @@ class _ResultState extends State<ResultPage> {
             question5: operationController.getAnswer(4),
             question6: operationController.getAnswer(5),
           ));
+          historyController.getHis(playerController.email.value);
           if (diffController.nivelUp()) {
             Get.to(() => const CongratulationPage());
           } else {

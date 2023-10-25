@@ -13,8 +13,9 @@ class HistoryController extends GetxController {
     await userUseCase.saveHis(his);
   }
 
-  List getHis(String email) {
-    List<dynamic> listHist = userUseCase.getHis(email) as List<dynamic>;
+  Future<List> getHis(String email) async {
+    List<dynamic> listHist = await userUseCase.getHis(email);
+    hist.clear();
     for (var element in listHist) {
       hist.add(element);
     }

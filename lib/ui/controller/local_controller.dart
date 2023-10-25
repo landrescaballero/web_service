@@ -1,6 +1,5 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:f_web_authentication/domain/models/user.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:loggy/loggy.dart';
@@ -15,7 +14,7 @@ class Local_controller extends GetxController {
 
   Future<void> sync() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
-    logInfo(connectivityResult);
+    //logInfo(connectivityResult);
     if (connectivityResult == ConnectivityResult.none) {
       logInfo("You are OFFLINE, getting from local");
     } else {
@@ -34,15 +33,10 @@ class Local_controller extends GetxController {
 
   Future<void> uploadLocalDataToServer(List localData) async {
     for (var localItem in localData) {
-      if (kDebugMode) {
-        print(localItem.email);
-        print(localItem.password);
-      }
-      final remoteItem =
-          await userUseCase.getUser(localItem.email, localItem.password);
+      final remoteItem = await userUseCase.verifyUser(localItem.email);
 
       if (remoteItem != false) {
-        logInfo("Ya esta ");
+        //logInfo("Ya esta ");
         // Si existe un elemento remoto con el mismo ID, actualiza los datos remotos
       } else {
         // Si no existe, inserta los datos locales en el servidor
@@ -62,9 +56,6 @@ class Local_controller extends GetxController {
   }
 
   Future<void> updateLocalData(List remoteData) async {
-    if (kDebugMode) {
-      print(remoteData);
-    }
     for (var userData in remoteData) {
       var useru = User(
         id: userData['id'],
@@ -80,10 +71,6 @@ class Local_controller extends GetxController {
       var localItem =
           await userUseCase.getUserLocal(useru.email, useru.password);
 
-      if (kDebugMode) {
-        print(localItem);
-        print(useru.id);
-      }
       if (localItem != false) {
         // Si existe un elemento local con el mismo ID, actualiza los datos locales
         logInfo("ya esta");
