@@ -58,7 +58,6 @@ class UserDataSource {
   }
 
   Future<bool> addUser(User user) async {
-    logInfo("Web service, Adding user");
 
     final response = await http.post(
       Uri.parse("https://retoolapi.dev/$apiKey/data"),

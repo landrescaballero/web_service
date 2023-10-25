@@ -1,7 +1,8 @@
 import 'dart:convert';
+
 import 'package:f_web_authentication/data/datasources/remote/models/local_history.dart';
-import 'package:loggy/loggy.dart';
 import 'package:http/http.dart' as http;
+import 'package:loggy/loggy.dart';
 
 import '../../../domain/models/history.dart';
 
@@ -60,7 +61,6 @@ class HistorySource {
   }
 
   Future<bool> verifyhis(int id) async {
-    logInfo("Web service, search history");
     var request = Uri.parse("https://retoolapi.dev/$apiKey/data/$id");
 
     var response = await http.get(request);

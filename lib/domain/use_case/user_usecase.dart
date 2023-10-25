@@ -2,7 +2,6 @@ import 'package:f_web_authentication/data/datasources/remote/models/local_histor
 import 'package:f_web_authentication/data/local_history_source.dart';
 import 'package:f_web_authentication/domain/models/history.dart';
 import 'package:get/get.dart';
-import 'package:loggy/loggy.dart';
 
 import '../../data/local_data_source.dart';
 import '../models/user.dart';
@@ -15,22 +14,18 @@ class UserUseCase {
 
   UserUseCase();
   Future<bool> getUserLocal(String email, String password) async {
-    logInfo("Getting users  from UseCase");
     return await _localDataSource.getUser(email, password);
   }
 
   Future<bool> getUser(String email, String password) async {
-    logInfo("Getting users  from UseCase");
     return await _repository.getUser(email, password);
   }
 
   Future<bool> verifyUser(String email) async {
-    logInfo("Getting users  from UseCase");
     return await _repository.verifyUser(email);
   }
 
   Future<bool> verifyUserLocal(String email) async {
-    logInfo("Getting users  from UseCase");
     return await _localDataSource.verifyUser(email);
   }
 
@@ -45,24 +40,19 @@ class UserUseCase {
   Future<List> getAllusersLocal() async => await _localDataSource.getAll();
 
   Future<void> saveHis(History his) async {
-    logInfo("Saving in repository");
     await _repository.saveHis(his);
   }
 
   Future<void> saveHisLocal(History his) async {
-    logInfo("Saving in local");
     await _localhistory.saveSession(his);
   }
   Future<void>  addelementLocal(LocalHistorial his) async {
-    logInfo("Saving in local");
     await _localhistory.addElement(his);
   }
   Future<List> getHis(String email) async {
-    logInfo("Saving in repository");
     return await _repository.getHis(email);
   }
   Future<List> getHisLocal(String email) async {
-    logInfo("Saving in local");
     return await _localhistory.getHis(email);
   }
   Future<bool> verifyhis(int id) async => await _repository.verifyhis(id);
